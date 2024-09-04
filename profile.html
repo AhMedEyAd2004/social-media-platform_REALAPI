@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/profile_script.css">
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="title"><a href="#">
+                <h1><b>Social</b></h1>
+            </a></div>
+        <div class="options">
+            <span id="add_post"><a data-bs-toggle="modal" data-bs-target="#exampleModal1" href="#">+</a></span>
+            <span id="profilePage"><a href="index.html">Home</a></span>
+            <span><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Logout</a></span>
+        </div>
+    </nav>
+    <!------------------MODAL of new Post ---------------------- -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Post Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div id="posting" class="modal-body">
+                    <div class="">
+                        <label for="post-title">Title</label>
+                        <input type="text" id="post-title">
+                    </div>
+                    <div class="">
+                        <label for="post-body">Body</label>
+                        <textarea id="post-body"></textarea>
+                    </div>
+                    <div class="">
+                        <label for="post-image">Post</label>
+                        <input type="file" id="post-image" name="img" accept="image/*">
+
+                        <div>
+                            <div id="img-slot-container">
+                                <img id="img-slot">
+                                <span onclick="removeImage()">X</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tags-input">
+                        <label for="post-tags">Tags :</label>
+                        <div id="tags-added"></div>
+                        <hr>
+                        <div>
+                            <span onclick="addTag(this,0)" class="badge bg-secondary">Sports</span>
+                            <span onclick="addTag(this,1)" class="badge bg-secondary">Economy</span>
+                            <span onclick="addTag(this,2)" class="badge bg-secondary">Cars</span>
+                            <span onclick="addTag(this,3)" class="badge bg-secondary">Games</span>
+                            <span onclick="addTag(this,4)" class="badge bg-secondary">Art</span>
+                            <span onclick="addTag(this,5)" class="badge bg-secondary">Movies</span>
+                        </div>
+                    </div>
+                    <div id="notif">
+                        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show"
+                            role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                                <use xlink:href="#check-circle-fill" />
+                            </svg>
+                            <div>
+                                Post added succesfully!!
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="post-btn" type="button" class="btn btn-danger">Post</button>
+                </div>
+            </div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+            </symbol>
+            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                    d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+            </symbol>
+            <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                    d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </symbol>
+        </svg>
+        <div id="notif2">
+            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:">
+                    <use xlink:href="#exclamation-triangle-fill" />
+                </svg>
+                <div>
+                    Tag is already added!!
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+    <!-- ----------MODAL for logout----------------------------- -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure..?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="logout-btn" type="button" class="btn btn-danger">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ---Modal for deletePost ------------------------------------------>
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure..?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="delete-btn" type="button" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---------------Modal for EditPost--------------------------------------------------------------- -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="">
+                        <label for="post-title2">Title</label>
+                        <input type="text" id="post-title2">
+                    </div>
+                    <div class="">
+                        <label for="post-body2">Body</label>
+                        <textarea id="post-body2"></textarea>
+                    </div>
+                    <div class="">
+                        <label for="post-image2">Post</label>
+                        <input type="file" id="post-image2" name="img" accept="image/*">
+
+                        <div>
+                            <div id="img-slot-container2">
+                                <img id="img-slot2">
+                                <span onclick="removeImage2()">X</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="notif3">
+                        <div class="alert alert-success d-flex align-items-center alert-dismissible fade show"
+                            role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
+                                <use xlink:href="#check-circle-fill" />
+                            </svg>
+                            <div>
+                                Post Updated!!
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="updating-btn" type="button" class="btn btn-success">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ------------------------------------------------------------- -->
+    <div class="container0">
+        <div class="container1">
+            <div id="user-info">
+                <div class="image"></div>
+                <div id="data">
+                    <div class="username"></div>
+                    <div class="name"></div>
+                    <div class="email"></div>
+                </div>
+                <div id="about">
+                    <div class="posts-count">0 <span>Posts</span></div>
+                    <div class="comments-count"> 0 <span>Comments</span></div>
+                </div>
+            </div>
+           <div id="user-posts">
+
+           </div>
+        </div>
+    </div>
+
+
+
+    <div id="stickyTop">
+        <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 429.658 429.658" xml:space="preserve">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+                <g>
+                    <g>
+                        <path
+                            d="M235.252,13.406l-0.447-0.998c-3.417-7.622-11.603-12.854-19.677-12.375l-0.3,0.016l-0.302-0.016 C214.194,0.011,213.856,0,213.524,0c-7.706,0-15.386,5.104-18.674,12.413l-0.452,0.998L13.662,176.079 c-6.871,6.183-6.495,12.657-4.971,16.999c2.661,7.559,10.361,13.373,18.313,13.82l1.592,0.297c0.68,0.168,1.356,0.348,2.095,0.427 c23.036,2.381,45.519,2.876,64.472,3.042l5.154,0.048V407.93c0,11.023,7.221,15.152,11.522,16.635l0.967,0.33l0.77,0.671 c3.105,2.717,7.02,4.093,11.644,4.093h179.215c4.626,0,8.541-1.376,11.639-4.093l0.771-0.671l0.965-0.33 c4.307-1.482,11.532-5.611,11.532-16.635V210.706l5.149-0.048c18.961-0.17,41.446-0.666,64.475-3.042 c0.731-0.079,1.407-0.254,2.082-0.422l1.604-0.302c7.952-0.447,15.65-6.262,18.312-13.82c1.528-4.336,1.899-10.811-4.972-16.998 L235.252,13.406z M344.114,173.365c-11.105,0.18-22.216,0.254-33.337,0.254c-5.153,0-9.363,1.607-12.507,4.768 c-3.372,3.4-5.296,8.48-5.266,13.932l0.005,0.65l-0.157,0.629c-0.437,1.767-0.64,3.336-0.64,4.928v194.001H137.458V198.526 c0-1.597-0.201-3.161-0.638-4.928l-0.157-0.629l0.005-0.65c0.031-5.456-1.892-10.537-5.271-13.937 c-3.141-3.161-7.353-4.763-12.507-4.768c-11.124,0-22.224-0.074-33.337-0.254l-13.223-0.218L214.834,44.897l142.503,128.249 L344.114,173.365z">
+                        </path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    </div>
+
+    <script src="./js/bootstrap.js"></script>
+    <script src="./js/profile_scripts.js"></script>
+</body>
+
+</html>

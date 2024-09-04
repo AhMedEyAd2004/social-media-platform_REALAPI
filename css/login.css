@@ -1,0 +1,98 @@
+*
+{
+    padding: 0px;
+    margin: 0px;
+}
+body
+{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.contain
+{
+    box-shadow: 1px 1px 4px grey,-1px -1px 4px grey;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    background-color: white;
+    max-width: 300px;
+}
+h2
+{
+    margin-bottom: 15px;
+}
+label
+{
+    display: block;
+    margin-bottom: 3px;
+    margin-top: 25px;
+}
+input
+{
+    width: 95%;
+    border-radius: 5px;
+    padding: 3px 8px;
+    border: 2px solid purple;
+    font-size: 18px;
+    color: rgb(72, 71, 71);
+}
+#btn
+{
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+}
+.warning
+{
+    color: orangered;
+    margin-top: 5px;
+}
+.warning p
+{
+    margin-top: 3px;
+}
+#regbtn,#logbtn,.clear
+{
+    border-radius: 10px;
+    padding: 5px 10px;
+    border: 2px solid white ;
+    background-color: purple;
+    color: white;
+    font-size: 18px;
+    margin-left: 8px;
+}
+#regbtn:hover,#logbtn:hover,.clear:hover
+{
+    border: 2px solid purple ;
+    color: purple;
+    background-color: white;
+    cursor: pointer;
+}
+
+.contain::after
+{
+    content: '';
+    width: 100px;
+    height:100px ;
+    border-radius: 50%;
+    z-index: -1;
+    background-image: linear-gradient(to top right,purple,rgb(230, 209, 230));
+    position:absolute;
+    top: -15%;
+    right: -10%;
+}
+.contain::before
+{
+    content: '';
+    width: 100px;
+    height:100px ;
+    border-radius: 50%;
+    z-index: -1;
+    background-image: linear-gradient(to top right,purple,rgb(230, 209, 230));
+    position: absolute;
+    bottom: -15%;
+    left: -10%;
+}

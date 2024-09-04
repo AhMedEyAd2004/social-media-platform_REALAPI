@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-Register</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <script src="./node_modules/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="contain">
+        <h2 id="todo">Register 
+            <button onclick="clearTxt()" class="clear">Clear Data</button>
+        </h2>
+        <div class="username">
+            <label for="user-inp">Username</label>
+            <input type="text" name="username" id="user-inp">
+            <div class="warning"></div>
+        </div>
+        <div class="name">
+            <label for="name-inp">Name</label>
+            <input type="text" name="name" id="name-inp">
+            <div class="warning"></div>
+        </div>
+        <div class="password">
+            <label for="pass-inp">Password</label>
+            <input type="password" name="pass" id="pass-inp">
+            <div class="warning"></div>
+        </div>
+
+        <div id="btn">
+            <button id="regbtn">Register</button>
+            <button id="logbtn">Login in</button>
+        </div>
+    </div>
+
+    <script src="./js/user.js"></script>
+</body>
+</html>
