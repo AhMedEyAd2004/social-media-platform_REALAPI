@@ -16,7 +16,7 @@ let container1 = document.querySelector(".container1");
 
 function viewPosts(pg) {
   axios
-    .get(`http://tarmeezacademy.com/api/v1/posts?page=${pg}`)
+    .get(`https://tarmeezacademy.com/api/v1/posts?page=${pg}`)
     .then((json) => {
       for (post of json.data.data) {
         let img_profile;
